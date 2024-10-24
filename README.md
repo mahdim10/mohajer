@@ -1,4 +1,4 @@
-# MarzneshinMigration
+# migration
 
 A tool to migrate from Marzban to Marzneshin in three simple steps:
 1. Data Export
@@ -28,11 +28,11 @@ Extracts Admins, Users, and JWT key from Marzban.
 Download and set up the export tool:
 ```bash
 cd /root
-wget -O master.zip https://github.com/erfjab/MarzneshinMigration/archive/refs/heads/master.zip
+wget -O master.zip https://github.com/erfjab/migration/archive/refs/heads/master.zip
 unzip -o master.zip
 mkdir -p /root/export
-cp -r MarzneshinMigration-master/export/* /root/export/
-rm -rf MarzneshinMigration-master master.zip
+cp -r migration-master/export/* /root/export/
+rm -rf migration-master master.zip
 ```
 
 Set up Python environment:
@@ -69,20 +69,21 @@ Follow the same prerequisites installation as in step 1.
 Download and set up the import tool:
 ```bash
 cd /root
-wget -O master.zip https://github.com/erfjab/MarzneshinMigration/archive/refs/heads/master.zip
+wget -O master.zip https://github.com/erfjab/migration/archive/refs/heads/master.zip
 unzip -o master.zip
 mkdir -p /root/import
-cp -r MarzneshinMigration-master/import/* /root/import/
-rm -rf MarzneshinMigration-master master.zip
+cp -r migration-master/import/* /root/import/
+rm -rf migration-master master.zip
 ```
 
 ### Configure Marzneshin
 
-Edit your Marzneshin Docker configuration (`/etc/opt/marzneshin/docker-compose.yml`) to add the following volumes:
+Edit your Marzneshin Docker configuration (`nano /etc/opt/marzneshin/docker-compose.yml`) to add the following volumes:
 ```yaml
-volumes:
-  - /root/import/docker/models/user.py:/app/app/models/user.py
-  - /root/import/docker/db/crud.py:/app/app/db/crud.py
+    volumes:
+      - /var/lib/marzneshin:/var/lib/marzneshin
+      - /root/import/docker/models/user.py:/app/app/models/user.py
+      - /root/import/docker/db/crud.py:/app/app/db/crud.py
 ```
 
 Restart Marzneshin to apply the changes:
@@ -94,8 +95,13 @@ marzneshin restart
 
 Edit the environment file for import:
 ```bash
-cd /root/import
 nano .env
+```
+```
+MARZNESHIN_USERNAME = "sudo_user"
+MARZNESHIN_PASSWORD = "sudo_pass"
+MARZNESHIN_ADDRESS="https://sub.domain.com:port"
+MARZBAN_USERS_DATA="marzban.json"
 ```
 
 Set up the Python environment:

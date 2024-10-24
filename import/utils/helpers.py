@@ -85,10 +85,9 @@ def parse_marz_user(old: MarzUserData, service: int) -> UserCreate:
     )
 
     username = (old.username).lower()
-    if not re.match(r"^\w{3,32}$", username):
-        clean = re.sub(r"[^\w]", "", username)
-        hash_part = hashlib.md5(username.encode()).hexdigest()[:3]
-        username = f"{clean}_{hash_part}"[:32]
+    clean = re.sub(r"[^\w]", "", username)
+    hash_part = hashlib.md5(username.encode()).hexdigest()[:4]
+    username = f"{clean}_{hash_part}"[:32]
 
     return UserCreate(
         username=username,
