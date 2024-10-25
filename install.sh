@@ -13,7 +13,6 @@ readonly SERVICE_NAME="${SCRIPT_NAME}"
 readonly SERVICE_FILE="/etc/systemd/system/${SERVICE_NAME}.service"
 readonly REPO_URL="https://github.com/erfjab/${SCRIPT_NAME}.git"
 readonly SCRIPT_URL="https://raw.githubusercontent.com/erfjab/${SCRIPT_NAME}/${BRANCH}/install.sh"
-readonly REPO_URL_WITH_TOKEN="https://${GITHUB_TOKEN}@github.com/erfjab/${SCRIPT_NAME}.git"
 
 # ANSI color codes
 declare -r -A COLORS=(
