@@ -255,12 +255,12 @@ install_script() {
     
     if [[ -f "$script_path" ]]; then
         warn "$SCRIPT_NAME script is already installed in $install_dir. Updating..."
-        sudo rm -rf $script_path
+        sudo rm -rf "$script_path"
     else
         log "Installing $SCRIPT_NAME script in $install_dir..."
     fi
     
-    curl -H -o "$script_path" "$SCRIPT_URL" || error "Failed to download the script"
+    curl -sL "$SCRIPT_URL" -o "$script_path" || error "Failed to download the script"
     chmod +x "$script_path" || error "Failed to set execute permissions on the script"
     success "$SCRIPT_NAME script installed/updated successfully in $install_dir."
 }
