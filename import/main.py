@@ -124,11 +124,6 @@ async def main():
 
                     try:
 
-                        check_user = await api.get_user(user.username)
-                        if check_user:
-                            logger.error(f"User already exists: {user.username}")
-                            continue
-
                         new_user = helpers.parse_marz_user(user, admin_service)
                         logger.debug(f"Data for {user.username}: {new_user.dict()}")
                         created_user = await api.create_user(new_user)
