@@ -84,9 +84,9 @@ def parse_marz_user(old: MarzUserData, service: int) -> UserCreate:
         else None
     )
 
-    username = (old.username).lower()
-    clean = re.sub(r"[^\w]", "", username)
-    hash_part = hashlib.md5(username.encode()).hexdigest()[:4]
+    username = old.username
+    clean = re.sub(r"[^\w]", "", (username).lower())
+    hash_part = hashlib.md5(username.encode()).hexdigest()[:8]
     username = f"{clean}_{hash_part}"[:32]
 
     return UserCreate(
