@@ -6,7 +6,10 @@ WORKDIR /code
 
 COPY ./requirements.txt .
 
-RUN pip install --no-cache-dir --upgrade -r requirements.txt
+RUN apk add --no-cache tzdata && \
+    cp /usr/share/zoneinfo/UTC /etc/localtime && \
+    echo "UTC" > /etc/timezone && \
+    pip install --no-cache-dir --upgrade -r requirements.txt
 
 COPY . .
 

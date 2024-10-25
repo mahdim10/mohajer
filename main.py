@@ -10,6 +10,7 @@ from fastapi.exception_handlers import (
     http_exception_handler,
     request_validation_exception_handler,
 )
+from contextlib import asynccontextmanager
 
 from jobs import stop_scheduler, start_scheduler
 from routers import subscription
@@ -26,15 +27,24 @@ from utils.config import (
 
 __version__ = "0.1.0"
 
+@asynccontextmanager
+async def lifespan(app: FastAPI):
+    """Manage application startup and shutdown events."""
+    await start_scheduler()
+    logger.info("Application started successfully.")
+    yield  # App will be running during this period
+    await stop_scheduler()
+    logger.info("Application shut down successfully.")
 
-async def create_app() -> FastAPI:
-
+def create_app() -> FastAPI:
+    """Create and configure FastAPI application instance."""
     app = FastAPI(
         title="Migration",
         description="API to proxy subscription requests between users and backend system",
         version=__version__,
         docs_url="/docs" if DOCS else None,
         redoc_url="/redoc" if DOCS else None,
+        lifespan=lifespan,  # Set the lifespan context manager
     )
 
     app.openapi = custom_openapi(app)
@@ -67,24 +77,9 @@ async def create_app() -> FastAPI:
     return app
 
 
-async def setup_event_handlers(app: FastAPI):
-    """Set up event handlers for the application."""
-
-    @app.on_event("startup")
-    async def on_startup():
-        await start_scheduler()
-        logger.info("Application started successfully.")
-
-    @app.on_event("shutdown")
-    async def on_shutdown():
-        await stop_scheduler()
-        logger.info("Application shut down successfully.")
-
-
 async def main():
     """Main function to run the application."""
-    app = await create_app()
-    await setup_event_handlers(app)
+    app = create_app()
 
     config = uvicorn.Config(
         app,
