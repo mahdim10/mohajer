@@ -260,7 +260,7 @@ install_script() {
         log "Installing $SCRIPT_NAME script in $install_dir..."
     fi
     
-    curl -H "Authorization: token $GITHUB_TOKEN" -o "$script_path" "$SCRIPT_URL" || error "Failed to download the script"
+    curl -H -o "$script_path" "$SCRIPT_URL" || error "Failed to download the script"
     chmod +x "$script_path" || error "Failed to set execute permissions on the script"
     success "$SCRIPT_NAME script installed/updated successfully in $install_dir."
 }
