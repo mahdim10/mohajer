@@ -97,6 +97,9 @@ Edit the environment file for import:
 ```bash
 nano .env
 ```
+
+You need to create a new sudo admin account. Ensure that this admin's username does **not** match any existing Marzban admin usernames.
+
 ```
 MARZNESHIN_USERNAME = "sudo_user"
 MARZNESHIN_PASSWORD = "sudo_pass"
@@ -165,7 +168,7 @@ cd /opt/erfjab/migration
 Download the example environment file:
 
 ```bash
-curl -o .env https://raw.githubusercontent.com/erfjab/holderbot/master/.env.example
+curl -o .env https://raw.githubusercontent.com/erfjab/migration/master/.env.example
 ```
 
 Edit the `.env` file:
