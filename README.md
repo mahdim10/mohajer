@@ -123,3 +123,121 @@ python3 main.py
 ```
 
 > **Important:** After completing the import, delete the Docker map files to avoid conflicts.
+
+
+## 3. Handler Sub
+
+
+### 1. Server Setup
+
+#### 1.1: Update the Server
+
+Ensure your server is up to date:
+
+```bash
+sudo apt update && sudo apt upgrade -y
+```
+
+#### 1.2: Install Docker
+
+Install Docker using this command:
+
+```bash
+curl -fsSL https://get.docker.com | sh
+```
+
+---
+
+### 2. Download and Configure
+
+#### 2.1: Create Directory and Download `docker-compose.yml`
+
+Create the necessary directory and download the `docker-compose.yml` file:
+
+```bash
+mkdir -p /opt/erfjab/migration/data
+curl -o /opt/erfjab/migration/docker-compose.yml https://raw.githubusercontent.com/erfjab/migration/master/docker-compose.yml
+cd /opt/erfjab/migration
+```
+
+#### 2.2: Download and Configure `.env`
+
+Download the example environment file:
+
+```bash
+curl -o .env https://raw.githubusercontent.com/erfjab/holderbot/master/.env.example
+```
+
+Edit the `.env` file:
+
+```bash
+nano .env
+```
+
+---
+
+### 3. Run the Handler
+
+#### 3.1: Pull the Latest Docker Image
+
+Pull the latest Docker image for the Handler:
+
+```bash
+docker compose pull
+```
+
+#### 3.2: Start the Handler
+
+Start the Handler in detached mode:
+
+```bash
+docker compose up -d
+```
+
+#### 3.3: Verify the Handler is Running
+
+Check the status of running containers:
+
+```bash
+docker compose ps
+```
+
+---
+
+### Updating the Handler
+
+To update the Handler to the latest version:
+
+1. Pull the latest Docker image:
+
+    ```bash
+    docker compose pull
+    ```
+
+2. Restart the Handler:
+
+    ```bash
+    docker compose up -d
+    ```
+
+---
+
+### Managing the Handler with Docker
+
+#### Restart the Handler
+
+```bash
+docker compose restart
+```
+
+#### Stop the Handler
+
+```bash
+docker compose down
+```
+
+#### View Real-Time Logs
+
+```bash
+docker compose logs -f
+```
