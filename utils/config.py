@@ -41,7 +41,7 @@ def check_required_settings():
 
 # Load configurations
 SQLALCHEMY_DATABASE_URL = config(
-    "SQLALCHEMY_DATABASE_URL", default="sqlite+aiosqlite:///data/db.sqlite3", cast=str
+    "SQLALCHEMY_DATABASE_URL", default="sqlite+aiosqlite:///db.sqlite3", cast=str
 )
 UVICORN_HOST = config("UVICORN_HOST", default="0.0.0.0")
 UVICORN_PORT = config("UVICORN_PORT", cast=int, default=999)

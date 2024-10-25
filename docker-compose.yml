@@ -1,8 +1,0 @@
-services:
-  migration:
-    image: erfjab/migration:latest
-    restart: always
-    env_file:
-      - .env
-    volumes:
-      - ./data/:/code/data/
