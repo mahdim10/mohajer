@@ -1,7 +1,7 @@
 from contextlib import asynccontextmanager
 from typing import AsyncGenerator
 
-from sqlalchemy.ext.asyncio import AsyncAttrs, AsyncSession, create_async_engine
+from sqlalchemy.ext.asyncio import AsyncSession, create_async_engine
 from sqlalchemy.orm import DeclarativeBase, sessionmaker
 
 
@@ -21,7 +21,7 @@ AsyncSessionLocal = sessionmaker(
 )
 
 
-class Base(DeclarativeBase, AsyncAttrs):
+class Base(DeclarativeBase):
     # Define a base class for declarative models
     pass
 
