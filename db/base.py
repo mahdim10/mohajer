@@ -4,11 +4,10 @@ from typing import AsyncGenerator
 from sqlalchemy.ext.asyncio import AsyncAttrs, AsyncSession, create_async_engine
 from sqlalchemy.orm import DeclarativeBase, sessionmaker
 
-from utils import config
 
 # Create an asynchronous engine
 engine = create_async_engine(
-    sqlite+aiosqlite:///db.sqlite3,
+    "sqlite+aiosqlite:///db.sqlite3",
     connect_args={"check_same_thread": False},
     echo=False,
 )
