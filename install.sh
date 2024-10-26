@@ -153,7 +153,7 @@ EOF
 
 clone_repo() {
     log "Cloning repository..."
-    git clone "$INSTALL_DIR/$SCRIPT_NAME" || error "Failed to clone repository"
+    git clone "$REPO_URL" "$INSTALL_DIR/$SCRIPT_NAME" || error "Failed to clone repository"
     success "Repository cloned successfully"
 }
 
