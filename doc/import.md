@@ -27,11 +27,17 @@ Ensure prerequisites are installed as in Step 1.
 
 Edit the Marzneshin Docker configuration to include these volumes:
 
+```
+nano /etc/opt/marzneshin/docker-compose.yml
+```
+
+**for v0.6.0:**
+
 ```yaml
     volumes:
       - /var/lib/marzneshin:/var/lib/marzneshin
-      - /root/import/docker/models/user.py:/app/app/models/user.py
-      - /root/import/docker/db/crud.py:/app/app/db/crud.py
+      - /root/import/docker/v0_6_0/models/user.py:/app/app/models/user.py
+      - /root/import/docker/v0_6_0/db/crud.py:/app/app/db/crud.py
 ```
 
 Restart Marzneshin to apply changes:
