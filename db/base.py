@@ -8,7 +8,7 @@ from utils import config
 
 # Create an asynchronous engine
 engine = create_async_engine(
-    config.SQLALCHEMY_DATABASE_URL,
+    sqlite+aiosqlite:///db.sqlite3,
     connect_args={"check_same_thread": False},
     echo=False,
 )

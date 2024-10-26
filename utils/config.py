@@ -39,10 +39,7 @@ def check_required_settings():
             "The 'MARZNESHIN_SUBSCRIPTION_URL_PREFIX' setting must be a valid URL with format like 'https://sub.domain.com:port' or 'http://ip:port'."
         )
 
-# Load configurations
-SQLALCHEMY_DATABASE_URL = config(
-    "SQLALCHEMY_DATABASE_URL", default="sqlite+aiosqlite:///db.sqlite3", cast=str
-)
+
 UVICORN_HOST = config("UVICORN_HOST", default="0.0.0.0")
 UVICORN_PORT = config("UVICORN_PORT", cast=int, default=999)
 UVICORN_UDS = config("UVICORN_UDS", default=None)
