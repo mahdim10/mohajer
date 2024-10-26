@@ -5,14 +5,14 @@ set -euo pipefail
 IFS=$'\n\t'
 
 # Global constants
-readonly SCRIPT_NAME="migration"
-readonly INSTALL_DIR="/opt/erfjab"
+readonly SCRIPT_NAME="mohajer"
+readonly INSTALL_DIR="/opt/mahdim10"
 readonly BRANCH="master"
 readonly LOG_FILE_ADDRESS="${INSTALL_DIR}/${SCRIPT_NAME}/${SCRIPT_NAME}.log"
 readonly SERVICE_NAME="${SCRIPT_NAME}"
 readonly SERVICE_FILE="/etc/systemd/system/${SERVICE_NAME}.service"
-readonly REPO_URL="https://github.com/erfjab/${SCRIPT_NAME}.git"
-readonly SCRIPT_URL="https://raw.githubusercontent.com/erfjab/${SCRIPT_NAME}/${BRANCH}/install.sh"
+readonly REPO_URL="https://github.com/mahdim10/${SCRIPT_NAME}.git"
+readonly SCRIPT_URL="https://raw.githubusercontent.com/mahdim10/${SCRIPT_NAME}/${BRANCH}/install.sh"
 
 # ANSI color codes
 declare -r -A COLORS=(
