@@ -2,8 +2,11 @@ from contextlib import asynccontextmanager
 from typing import AsyncGenerator
 
 from sqlalchemy.ext.asyncio import AsyncSession, create_async_engine
-from sqlalchemy.orm import DeclarativeBase, sessionmaker
+from sqlalchemy.ext.declarative import declarative_base
+from sqlalchemy.orm import sessionmaker
 
+# Create base class for declarative models
+Base = declarative_base()
 
 # Create an asynchronous engine
 engine = create_async_engine(
@@ -19,11 +22,6 @@ AsyncSessionLocal = sessionmaker(
     autocommit=False,
     autoflush=False,
 )
-
-
-class Base(DeclarativeBase):
-    # Define a base class for declarative models
-    pass
 
 
 @asynccontextmanager
