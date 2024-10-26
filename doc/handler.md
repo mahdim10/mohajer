@@ -23,7 +23,12 @@ To install the `migration` bot, execute the following commands:
    migration --install-service
    ```
 
-4. Start the bot:
+4. Set up the db:
+   ```bash
+   python -m alembic upgrade head
+   ```
+
+5. Start the bot:
    ```bash
    migration --start
    ```
