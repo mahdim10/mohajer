@@ -1,4 +1,3 @@
-
 import json
 import pytz
 import re
@@ -12,6 +11,9 @@ from typing import Optional, Tuple, Dict, List
 from utils import config, logger
 from models import MarzAdminData, MarzUserData, UserCreate, UserExpireStrategy
 
+def gen_key(uuid : str)-> str:
+    stripped = uuid.strip('"')
+    return stripped.replace('-', '')
 
 def parse_marzban_data(
     json_file: str | Path = config.MARZBAN_USERS_DATA,
@@ -89,6 +91,8 @@ def parse_marz_user(old: MarzUserData, service: int) -> UserCreate:
     hash_str = str(int(hashlib.md5(username.encode()).hexdigest(), 16) % 10000).zfill(4)
     username = f"{clean}_{hash_str}"[:32]
 
+    key = gen_key(old.uuid) if old.uuid is not None else None
+
     return UserCreate(
         username=username,
         data_limit=data_limit,
@@ -113,4 +117,5 @@ def parse_marz_user(old: MarzUserData, service: int) -> UserCreate:
         expire_date=expire_date,
         created_at=old.created_at.isoformat() if old.created_at else None,
         sub_revoked_at=old.sub_revoked_at.isoformat() if old.sub_revoked_at else None,
+        key=key
     )
