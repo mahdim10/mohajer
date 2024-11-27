@@ -10,7 +10,6 @@ def check_required_settings():
         "MARZNESHIN_ADDRESS": MARZNESHIN_ADDRESS,
         "MARZBAN_JWT_TOKEN": MARZBAN_JWT_TOKEN,
         "MARZBAN_XRAY_SUBSCRIPTION_PATH": MARZBAN_XRAY_SUBSCRIPTION_PATH,
-        "MARZNESHIN_SUBSCRIPTION_URL_PREFIX" : MARZNESHIN_SUBSCRIPTION_URL_PREFIX
     }
 
     # Address pattern: Supports https://domain:port or http://ip:port
@@ -33,12 +32,6 @@ def check_required_settings():
             "The 'MARZNESHIN_ADDRESS' setting must be a valid URL with format like 'https://sub.domain.com:port' or 'http://ip:port'."
         )
 
-    # Validate MARZNESHIN_SUBSCRIPTION_URL_PREFIX format
-    if not address_pattern.match(MARZNESHIN_SUBSCRIPTION_URL_PREFIX):
-        raise ValueError(
-            "The 'MARZNESHIN_SUBSCRIPTION_URL_PREFIX' setting must be a valid URL with format like 'https://sub.domain.com:port' or 'http://ip:port'."
-        )
-
 
 UVICORN_HOST = config("UVICORN_HOST", default="0.0.0.0")
 UVICORN_PORT = config("UVICORN_PORT", cast=int, default=999)
@@ -55,7 +48,4 @@ MARZNESHIN_ADDRESS = config("MARZNESHIN_ADDRESS", default="", cast=str)
 MARZBAN_JWT_TOKEN = config("MARZBAN_JWT_TOKEN", default="", cast=str)
 MARZBAN_XRAY_SUBSCRIPTION_PATH = config(
     "MARZBAN_XRAY_SUBSCRIPTION_PATH", default="", cast=str
-)
-MARZNESHIN_SUBSCRIPTION_URL_PREFIX = config(
-    "MARZNESHIN_SUBSCRIPTION_URL_PREFIX", default="", cast=str
 )

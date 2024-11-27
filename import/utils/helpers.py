@@ -1,4 +1,3 @@
-
 import json
 import pytz
 import re
@@ -27,7 +26,9 @@ def parse_marzban_data(
             data: Dict[str, List[dict]] = json.load(file)
 
         if not all(key in data for key in ("users", "admins", "jwt")):
-            logger.error("Missing required keys 'users' or 'admins' or 'jwt' in JSON data")
+            logger.error(
+                "Missing required keys 'users' or 'admins' or 'jwt' in JSON data"
+            )
             return None
 
         admins = [MarzAdminData(**admin) for admin in data["admins"]]
@@ -68,7 +69,6 @@ def parse_marzban_data(
 
 
 def parse_marz_user(old: MarzUserData, service: int) -> UserCreate:
-
     if old.data_limit:
         remaining_data = old.data_limit - old.used_traffic
         data_limit = 1024 * 1024 if remaining_data <= 0 else remaining_data

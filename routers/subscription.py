@@ -5,7 +5,7 @@ import hashlib
 from fastapi import APIRouter, HTTPException, status, Request, Response
 from utils.log import logger
 from utils import auth, panel
-from utils.config import MARZBAN_XRAY_SUBSCRIPTION_PATH, MARZNESHIN_SUBSCRIPTION_URL_PREFIX
+from utils.config import MARZBAN_XRAY_SUBSCRIPTION_PATH
 
 router = APIRouter(tags=["Subscription"], prefix=f"/{MARZBAN_XRAY_SUBSCRIPTION_PATH}")
 
@@ -13,7 +13,6 @@ router = APIRouter(tags=["Subscription"], prefix=f"/{MARZBAN_XRAY_SUBSCRIPTION_P
 @router.get("/{token}/")
 @router.get("/{token}", include_in_schema=False)
 async def upsert_user(request: Request, token: str):
-
     sub = auth.get_subscription_payload(token=token)
     if not sub:
         raise HTTPException(status_code=400, detail="Invalid subscription token")
@@ -45,7 +44,7 @@ async def upsert_user(request: Request, token: str):
 
         async with httpx.AsyncClient(follow_redirects=True) as client:
             response = await client.get(
-                f"{MARZNESHIN_SUBSCRIPTION_URL_PREFIX}{dbuser.subscription_url}",
+                f"{dbuser.subscription_url}",
                 headers=headers,
                 params=params,
             )

@@ -4,7 +4,6 @@ from models import TokenUpsert, TokenData
 
 
 class TokenManager:
-
     @staticmethod
     async def upsert(token_upsert: TokenUpsert) -> TokenData:
         async with GetDB() as db:

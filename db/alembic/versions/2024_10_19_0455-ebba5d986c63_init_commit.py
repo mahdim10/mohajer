@@ -1,6 +1,6 @@
 """init commit
 Revision ID: ebba5d986c63
-Revises: 
+Revises:
 Create Date: 2024-10-19 04:55:30.852310
 """
 

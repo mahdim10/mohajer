@@ -110,7 +110,6 @@ async def main():
             logger.info(f"Processing users for admin: {admin} ({len(users)} users)")
 
             async with MarzneshinClient() as api:
-
                 logger.info(f"Logging in as admin: {admin}")
                 check_login = await api.login(admin, f"{admin}{admin}")
                 if not check_login:
@@ -123,7 +122,6 @@ async def main():
                     logger.info(f"Processing user: {user.username}")
 
                     try:
-
                         new_user = helpers.parse_marz_user(user, admin_service)
                         logger.debug(f"Data for {user.username}: {new_user.dict()}")
                         created_user = await api.create_user(new_user)

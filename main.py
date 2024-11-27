@@ -27,6 +27,7 @@ from utils.config import (
 
 __version__ = "0.1.0"
 
+
 @asynccontextmanager
 async def lifespan(app: FastAPI):
     """Manage application startup and shutdown events."""
@@ -35,6 +36,7 @@ async def lifespan(app: FastAPI):
     yield  # App will be running during this period
     await stop_scheduler()
     logger.info("Application shut down successfully.")
+
 
 def create_app() -> FastAPI:
     """Create and configure FastAPI application instance."""

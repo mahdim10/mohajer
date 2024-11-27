@@ -7,7 +7,6 @@ from utils.config import MARZNESHIN_ADDRESS, MARZNESHIN_USERNAME, MARZNESHIN_PAS
 
 async def get_token() -> str:
     try:
-
         async with httpx.AsyncClient() as client:
             response = await client.post(
                 f"{MARZNESHIN_ADDRESS}/api/admins/token",
