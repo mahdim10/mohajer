@@ -43,7 +43,10 @@ def make_exceptions_list(json_file: str | Path = config.MARZBAN_USERS_DATA):
         for username in usernames:
             # Replace '-' with '_' and check the regex pattern
             modified_u = username.replace('-', '_')
-            if not (re.fullmatch(USERNAME_REGEXP, modified_u) and username.lower() not in dup and modified_u not in usernames):
+            is_valid_format = re.fullmatch(USERNAME_REGEXP, modified_u)
+            is_not_duplicate = username.lower() not in dup
+            is_unique_or_same = modified_u not in usernames if modified_u != username else True
+            if not (is_valid_format and is_not_duplicate and is_unique_or_same):
                 exceptions.append(username)
                 
         
